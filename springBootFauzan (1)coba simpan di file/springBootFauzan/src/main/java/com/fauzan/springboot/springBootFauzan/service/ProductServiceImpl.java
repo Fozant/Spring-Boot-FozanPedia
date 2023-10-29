@@ -63,21 +63,22 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
     @Override
-    public List<Product> getSortedProducts(String sortField) {
-        List<Product> allProducts = getAllProducts();
-        switch (sortField) {
-            case "name":
-                Collections.sort(allProducts, Comparator.comparing(Product::getName));
-                break;
-            case "price":
-                Collections.sort(allProducts, Comparator.comparing(Product::getPrice));
-                break;
-            // Add more cases for additional sorting options
-            default:
-                // Default sorting by product ID
-                Collections.sort(allProducts, Comparator.comparing(Product::getId));
-                break;
-        }
-        return allProducts;
+public List<Product> getSortedProducts(String sortField) {
+    List<Product> allProducts = getAllProducts();
+    switch (sortField) {
+        case "name":
+            allProducts.sort(Comparator.comparing(p -> p.getName().toLowerCase()));
+            break;
+        case "price":
+            allProducts.sort(Comparator.comparing(Product::getPrice));
+            break;
+        
+        default:
+            
+            allProducts.sort(Comparator.comparing(Product::getId));
+            break;
     }
+    return allProducts;
+}
+
 }
