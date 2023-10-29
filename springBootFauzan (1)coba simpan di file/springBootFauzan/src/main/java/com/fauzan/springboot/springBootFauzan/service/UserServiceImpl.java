@@ -19,12 +19,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
-    private final BCryptPasswordEncoder pwencoder;
-
     @Autowired
     public UserServiceImpl(UserRepo userRepo, BCryptPasswordEncoder pwencoder) {
         this.userRepo = userRepo;
-        this.pwencoder = pwencoder;
     }
 
     @Override

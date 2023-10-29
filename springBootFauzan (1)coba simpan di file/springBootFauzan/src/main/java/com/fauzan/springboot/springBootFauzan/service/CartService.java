@@ -2,7 +2,6 @@ package com.fauzan.springboot.springBootFauzan.service;
 
 import java.util.List;
 
-import com.fauzan.springboot.springBootFauzan.model.Product;
 import com.fauzan.springboot.springBootFauzan.model.User;
 import com.fauzan.springboot.springBootFauzan.model.UserCart;
 

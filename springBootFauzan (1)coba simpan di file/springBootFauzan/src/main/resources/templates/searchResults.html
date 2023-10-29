@@ -48,6 +48,15 @@
     </form>
 </div>
 
+<!-- Filter Box -->
+
+<div class="container" style="margin-top: 20px;">
+    <div>
+        <a th:href="@{/home?sortField=name}" class="btn btn-primary sort-btn">Sort by Name</a>
+        <a th:href="@{/home?sortField=price}" class="btn btn-primary sort-btn">Sort by Price</a>
+        
+    </div>
+</div>
 
     <!-- Back Button -->
     <div style="text-align: center; margin-top: 20px;">
@@ -114,6 +123,33 @@
     <br><br>
     <div class="container">
         <h2>Welcome to Admin page</h2>
+
+
+  <!-- Search Box -->
+  <div class="container" style="margin-top: 20px;">
+    <form class="form-inline" th:action="@{/search}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchInput" name="keyword" placeholder="Search products" th:value="${keyword}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<!-- Filter Box -->
+
+<div class="container" style="margin-top: 20px;">
+    <div>
+        <a th:href="@{/home?sortField=name}" class="btn btn-primary sort-btn">Sort by Name</a>
+        <a th:href="@{/home?sortField=price}" class="btn btn-primary sort-btn">Sort by Price</a>
+        
+    </div>
+</div>
+
+    <!-- Back Button -->
+    <div style="text-align: center; margin-top: 20px;">
+        <a th:href="@{/home}" class="btn btn-primary">Back to Home</a>
+    </div>
+
     </div>
     <div class="container">
         <table class="table table-striped">

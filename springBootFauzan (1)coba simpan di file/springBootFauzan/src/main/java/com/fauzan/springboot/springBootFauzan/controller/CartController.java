@@ -5,15 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fauzan.springboot.springBootFauzan.model.Product;
 import com.fauzan.springboot.springBootFauzan.model.PurchaseHistory;
 import com.fauzan.springboot.springBootFauzan.model.User;
 import com.fauzan.springboot.springBootFauzan.model.UserCart;
@@ -24,14 +21,12 @@ import com.fauzan.springboot.springBootFauzan.service.UserService;
 @Controller
 public class CartController {
 
-    private final ProductService productService;
     private final CartService cartService;
     private final UserService userService;
     private final PurchaseHistoryService purchaseHistoryService;
 
     public CartController(ProductService productService, CartService cartService, UserService userService,
             PurchaseHistoryService purchaseHistoryService) {
-        this.productService = productService;
         this.cartService = cartService;
         this.userService = userService;
         this.purchaseHistoryService = purchaseHistoryService;

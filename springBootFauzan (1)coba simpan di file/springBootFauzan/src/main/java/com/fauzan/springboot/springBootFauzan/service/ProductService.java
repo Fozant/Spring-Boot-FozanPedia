@@ -12,4 +12,5 @@ public interface ProductService {
     void setImageUrl(Product product, String imageUrl);
     String getImageUrl(Product product);
     List<Product> searchProducts(String keyword);
+    List<Product> getSortedProducts(String sortField);
 }

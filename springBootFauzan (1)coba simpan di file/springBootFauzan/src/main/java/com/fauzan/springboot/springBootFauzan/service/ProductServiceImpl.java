@@ -1,5 +1,7 @@
 package com.fauzan.springboot.springBootFauzan.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.fauzan.springboot.springBootFauzan.model.Product;
 import com.fauzan.springboot.springBootFauzan.repository.ProductRepo;
-import com.fauzan.springboot.springBootFauzan.repository.UserCartRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -60,5 +61,23 @@ public class ProductServiceImpl implements ProductService {
         return allProducts.stream()
                 .filter(product -> product.getName().toLowerCase().contains(keyword.toLowerCase()) || product.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+    @Override
+    public List<Product> getSortedProducts(String sortField) {
+        List<Product> allProducts = getAllProducts();
+        switch (sortField) {
+            case "name":
+                Collections.sort(allProducts, Comparator.comparing(Product::getName));
+                break;
+            case "price":
+                Collections.sort(allProducts, Comparator.comparing(Product::getPrice));
+                break;
+            // Add more cases for additional sorting options
+            default:
+                // Default sorting by product ID
+                Collections.sort(allProducts, Comparator.comparing(Product::getId));
+                break;
+        }
+        return allProducts;
     }
 }

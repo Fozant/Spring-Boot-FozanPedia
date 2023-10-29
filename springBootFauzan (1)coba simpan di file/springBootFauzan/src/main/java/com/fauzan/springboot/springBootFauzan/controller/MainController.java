@@ -23,20 +23,26 @@ public class MainController {
     public String login() {
         return "login"; 
     }
+    
     @GetMapping("/home")
-    public String home(Model model) {
-        List<Product> products = productService.getAllProducts();
+    public String home(Model model, @RequestParam(name = "sortField", required = false) String sortField) {
+        List<Product> products;
+        
+        if (sortField != null) {
+            products = productService.getSortedProducts(sortField);
+        } else {
+            products = productService.getAllProducts();
+        }
         
         model.addAttribute("products", products);
         return "home"; 
     }
     
-   @PostMapping("/search")
+    @PostMapping("/search")
     public String search(@RequestParam(name = "keyword") String keyword, Model model) {
-    List<Product> searchResults = productService.searchProducts(keyword);
-    model.addAttribute("searchResults", searchResults);
-    model.addAttribute("keyword", keyword);
-    return "searchResults";
-}
-
+        List<Product> searchResults = productService.searchProducts(keyword);
+        model.addAttribute("searchResults", searchResults);
+        model.addAttribute("keyword", keyword);
+        return "searchResults";
+    }
 }
