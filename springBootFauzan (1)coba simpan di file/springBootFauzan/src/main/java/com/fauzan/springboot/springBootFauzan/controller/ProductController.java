@@ -52,11 +52,35 @@ public class ProductController {
     }
 
     @PostMapping("/products/update")
-    public String showFormForUpdate(@RequestParam("productId") long id, Model model) {
-        Product product = productService.getProductById(id);
-        model.addAttribute("product", product);
-        return "addProduct";
+    public String showFormForUpdate(@RequestParam("productId") long id, @ModelAttribute Product updatedProduct, Model model) {
+    Product existingProduct = productService.getProductById(id);
+    updatedProduct.setId(existingProduct.getId());
+    
+    updatedProduct.setImageUrl(existingProduct.getImageUrl());
+    productService.save(updatedProduct);
+    model.addAttribute("success", true);
+    return "updateProduct"; 
+}
+    @PostMapping("/products/update/save")
+    public String saveUpdatedProduct(@ModelAttribute Product product, Model model) {
+    // Retrieve the existing product by ID
+    Product existingProduct = productService.getProductById(product.getId());
+
+    // Check if the existing product's imageUrl is not null and set it to the updated product
+    if (existingProduct.getImageUrl() != null) {
+        product.setImageUrl(existingProduct.getImageUrl());
     }
+
+    // Save the updated product
+    productService.save(product);
+
+    model.addAttribute("success", true);
+    return "redirect:/home";
+}
+
+
+
+
 
     @PostMapping("/products/delete")
     public String delete(@RequestParam("productId") long id) {
